@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover a new chemical element every day">
+  <meta name="description" content="Daily iron or magnesium supplement reminder">
   <title>Element of the Day</title>
   <meta name="theme-color" content="#0a0a0a">
   <style>
@@ -57,35 +57,13 @@
   <div id="element"></div>
   <div id="meta"></div>
   <script>
-    const ELEMENTS = [
-      'Hydrogen','Helium','Lithium','Beryllium','Boron','Carbon','Nitrogen',
-      'Oxygen','Fluorine','Neon','Sodium','Magnesium','Aluminium','Silicon',
-      'Phosphorus','Sulfur','Chlorine','Argon','Potassium','Calcium','Scandium',
-      'Titanium','Vanadium','Chromium','Manganese','Iron','Cobalt','Nickel',
-      'Copper','Zinc','Gallium','Germanium','Arsenic','Selenium','Bromine',
-      'Krypton','Rubidium','Strontium','Yttrium','Zirconium','Niobium',
-      'Molybdenum','Technetium','Ruthenium','Rhodium','Palladium','Silver',
-      'Cadmium','Indium','Tin','Antimony','Tellurium','Iodine','Xenon',
-      'Caesium','Barium','Lanthanum','Cerium','Praseodymium','Neodymium',
-      'Promethium','Samarium','Europium','Gadolinium','Terbium','Dysprosium',
-      'Holmium','Erbium','Thulium','Ytterbium','Lutetium','Hafnium','Tantalum',
-      'Tungsten','Rhenium','Osmium','Iridium','Platinum','Gold','Mercury',
-      'Thallium','Lead','Bismuth','Polonium','Astatine','Radon','Francium',
-      'Radium','Actinium','Thorium','Protactinium','Uranium','Neptunium',
-      'Plutonium','Americium','Curium','Berkelium','Californium','Einsteinium',
-      'Fermium','Mendelevium','Nobelium','Lawrencium','Rutherfordium','Dubnium',
-      'Seaborgium','Bohrium','Hassium','Meitnerium','Darmstadtium',
-      'Roentgenium','Copernicium','Nihonium','Flerovium','Moscovium',
-      'Livermorium','Tennessine','Oganesson'
-    ];
-
     const today = new Date();
     const dayOfYear = Math.floor(
       (today - new Date(today.getFullYear(), 0, 0)) / 86400000
     );
-    const index = dayOfYear % ELEMENTS.length;
+    const isEven = dayOfYear % 2 === 0;
 
-    document.getElementById('element').textContent = ELEMENTS[index];
+    document.getElementById('element').textContent = isEven ? 'Iron' : 'Magnesium';
     document.getElementById('meta').textContent = today.toLocaleDateString(
       'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }
     );
