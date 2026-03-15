@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover a new chemical element every day">
+  <title>Element of the Day</title>
+  <meta name="theme-color" content="#0a0a0a">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --fg: #f0ede8;
+      --accent: #c8b89a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'DM Mono', monospace;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    #element {
+      font-size: clamp(3rem, 18vw, 9rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      animation: appear 0.4s ease both;
+    }
+
+    #meta {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: appear 0.4s 0.15s ease both;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="element"></div>
+  <div id="meta"></div>
+  <script>
+    const ELEMENTS = [
+      'Hydrogen','Helium','Lithium','Beryllium','Boron','Carbon','Nitrogen',
+      'Oxygen','Fluorine','Neon','Sodium','Magnesium','Aluminium','Silicon',
+      'Phosphorus','Sulfur','Chlorine','Argon','Potassium','Calcium','Scandium',
+      'Titanium','Vanadium','Chromium','Manganese','Iron','Cobalt','Nickel',
+      'Copper','Zinc','Gallium','Germanium','Arsenic','Selenium','Bromine',
+      'Krypton','Rubidium','Strontium','Yttrium','Zirconium','Niobium',
+      'Molybdenum','Technetium','Ruthenium','Rhodium','Palladium','Silver',
+      'Cadmium','Indium','Tin','Antimony','Tellurium','Iodine','Xenon',
+      'Caesium','Barium','Lanthanum','Cerium','Praseodymium','Neodymium',
+      'Promethium','Samarium','Europium','Gadolinium','Terbium','Dysprosium',
+      'Holmium','Erbium','Thulium','Ytterbium','Lutetium','Hafnium','Tantalum',
+      'Tungsten','Rhenium','Osmium','Iridium','Platinum','Gold','Mercury',
+      'Thallium','Lead','Bismuth','Polonium','Astatine','Radon','Francium',
+      'Radium','Actinium','Thorium','Protactinium','Uranium','Neptunium',
+      'Plutonium','Americium','Curium','Berkelium','Californium','Einsteinium',
+      'Fermium','Mendelevium','Nobelium','Lawrencium','Rutherfordium','Dubnium',
+      'Seaborgium','Bohrium','Hassium','Meitnerium','Darmstadtium',
+      'Roentgenium','Copernicium','Nihonium','Flerovium','Moscovium',
+      'Livermorium','Tennessine','Oganesson'
+    ];
+
+    const today = new Date();
+    const dayOfYear = Math.floor(
+      (today - new Date(today.getFullYear(), 0, 0)) / 86400000
+    );
+    const index = dayOfYear % ELEMENTS.length;
+
+    document.getElementById('element').textContent = ELEMENTS[index];
+    document.getElementById('meta').textContent = today.toLocaleDateString(
+      'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }
+    );
+  </script>
+</body>
+</html>
