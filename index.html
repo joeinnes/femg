@@ -6,6 +6,10 @@
   <meta name="description" content="Daily iron or magnesium supplement reminder">
   <title>Element of the Day</title>
   <meta name="theme-color" content="#0a0a0a">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;500&display=swap');
 
@@ -58,15 +62,18 @@
   <div id="meta"></div>
   <script>
     const today = new Date();
-    const dayOfYear = Math.floor(
-      (today - new Date(today.getFullYear(), 0, 0)) / 86400000
-    );
-    const isEven = dayOfYear % 2 === 0;
+    const epoch = new Date(2000, 0, 1);
+    const days = Math.floor((today - epoch) / 86400000);
+    const isEven = days % 2 === 0;
 
     document.getElementById('element').textContent = isEven ? 'Iron' : 'Magnesium';
     document.getElementById('meta').textContent = today.toLocaleDateString(
       'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }
     );
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
   </script>
 </body>
 </html>
